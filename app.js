@@ -1,3 +1,4 @@
+/**DOM elements */
 const body = document.querySelector("body");
 
 const appWrapper = createElement("div", "app-wrapper");
@@ -18,6 +19,10 @@ const firstNumberContainer = createElement("div", "number-container");
 const operandContainer = createElement("div", "operand-container");
 const secondNumberContainer = createElement("div", "number-container");
 
+const addButton = createButtons("operation-button", "+");
+
+operationButtonsContainer.append(addButton);
+
 buttonsContainer.append(numberButtonsContainer, operationButtonsContainer);
 
 screenWrapper.append(
@@ -32,6 +37,16 @@ appWrapper.append(calculatorWrapper);
 
 body.append(appWrapper);
 
+/**FUNCTION CALLINGS */
+const calculator = new Calculator();
+
+calculator.setNumber(5);
+calculator.setNumber(20);
+
+calculator.sub();
+console.log(calculator.getNumber("result"));
+
+/**FUNCTIONS */
 function createElement(element, className) {
   const newElement = document.createElement(element);
   newElement.classList.add(className);
@@ -82,10 +97,11 @@ function Calculator() {
   };
 }
 
-const calculator = new Calculator();
-
-calculator.setNumber(5);
-calculator.setNumber(20);
-
-calculator.sub();
-console.log(calculator.getNumber("result"));
+function createButtons(className, content) {
+  const button = createElement("button", className);
+  button.textContent = content;
+  if (typeof content === "number") {
+    button.value = calculator;
+  }
+  return button;
+}
