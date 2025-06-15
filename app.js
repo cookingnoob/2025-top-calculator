@@ -2,9 +2,32 @@ const body = document.querySelector("body");
 
 const appWrapper = createElement("div", "app-wrapper");
 const calculatorWrapper = createElement("div", "calculator-wrapper");
-const screenWrapper = createElement("div", "screen-wrapper");
+const screenWrapper = createElement("section", "screen-wrapper");
+const buttonsContainer = createElement("section", "buttons-container");
+const numberButtonsContainer = createElement(
+  "section",
+  "number-buttons-container"
+);
+const operationButtonsContainer = createElement(
+  "section",
+  "operations-buttons-container"
+);
 
-calculatorWrapper.append(screenWrapper);
+const operationContainer = createElement("div", "operations-container");
+const firstNumberContainer = createElement("div", "number-container");
+const operandContainer = createElement("div", "operand-container");
+const secondNumberContainer = createElement("div", "number-container");
+
+buttonsContainer.append(numberButtonsContainer, operationButtonsContainer);
+
+screenWrapper.append(
+  operationContainer,
+  firstNumberContainer,
+  operandContainer,
+  secondNumberContainer
+);
+
+calculatorWrapper.append(screenWrapper, buttonsContainer);
 appWrapper.append(calculatorWrapper);
 
 body.append(appWrapper);
