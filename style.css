@@ -1,0 +1,20 @@
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator-wrapper {
+  width: 500px;
+  height: 800px;
+  background-color: rgb(68, 68, 68);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.screen-wrapper {
+  background-color: rgba(156, 255, 102, 0.38);
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+}
