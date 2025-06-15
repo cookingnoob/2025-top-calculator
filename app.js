@@ -17,34 +17,52 @@ function createElement(element, className) {
 
 function Calculator() {
   return {
-    firstNumber: 4,
-    secondNumber: 9,
-    result: 0,
+    firstNumber: null,
+    secondNumber: null,
+    result: null,
     currentOperation: null,
     add: function () {
       this.result = this.firstNumber + this.secondNumber;
     },
     sub: function () {
-      return this.firstNumber - this.secondNumber;
+      this.result = this.firstNumber - this.secondNumber;
     },
     multiply: function () {
-      return this.firstNumber * this.secondNumber;
+      this.result = this.firstNumber * this.secondNumber;
     },
     divide: function () {
-      return this.firstNumber / this.secondNumber;
+      this.result = this.firstNumber / this.secondNumber;
     },
     reset: function () {
-      this.firstNumber = 0;
-      this.secondNumber = 0;
+      this.firstNumber = null;
+      this.secondNumber = null;
       this.currentOperation = null;
     },
-    getResult: function () {
-      return this.result;
+    getNumber: function (numberType) {
+      if (numberType === "result") {
+        return this.result;
+      } else if (numberType === "first") {
+        return this.firstNumber;
+      } else if (numberType === "second") {
+        return this.secondNumber;
+      } else {
+        throw new Error("that number doesnt exist");
+      }
+    },
+    setNumber: function (input) {
+      if (this.firstNumber) {
+        this.secondNumber = input;
+        return;
+      }
+      this.firstNumber = input;
     },
   };
 }
 
 const calculator = new Calculator();
 
-calculator.add();
-console.log(calculator.getResult());
+calculator.setNumber(5);
+calculator.setNumber(20);
+
+calculator.sub();
+console.log(calculator.getNumber("result"));
