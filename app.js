@@ -52,16 +52,6 @@ appWrapper.append(calculatorWrapper);
 
 body.append(appWrapper);
 
-/**FUNCTION CALLINGS */
-const calculator = new Calculator();
-
-// calculator.setNumber(5);
-// calculator.setNumber(20);
-// calculator.setOperation("-");
-
-calculator.getCalculation();
-calculator.getResult();
-
 /**FUNCTIONS */
 function createElement(element, className) {
   const newElement = document.createElement(element);
@@ -109,12 +99,10 @@ function Calculator() {
       if (this.isSecondNumber) {
         secondNumberContainer.textContent += `${input}`;
         this.secondNumber = +secondNumberContainer.textContent;
-        console.log(this.secondNumber);
         return;
       }
       firstNumberContainer.textContent += `${input}`;
       this.firstNumber = +firstNumberContainer.textContent;
-      console.log(this.firstNumber);
     },
     setOperation: function (input) {
       this.operand = input;
@@ -159,3 +147,6 @@ function createButtons(className, content) {
   }
   return button;
 }
+
+/**FUNCTION CALLINGS */
+const calculator = new Calculator();
