@@ -109,6 +109,7 @@ function Calculator() {
       if (this.isSecondNumber) {
         secondNumberContainer.textContent += `${input}`;
         this.secondNumber = +secondNumberContainer.textContent;
+        console.log(this.secondNumber);
         return;
       }
       firstNumberContainer.textContent += `${input}`;
@@ -150,6 +151,11 @@ function createButtons(className, content) {
   button.textContent = content;
   if (typeof content === "number") {
     button.value = content;
+  }
+  if (typeof content !== "number") {
+    button.addEventListener("click", (e) =>
+      calculator.setOperation(e.target.textContent)
+    );
   }
   return button;
 }
