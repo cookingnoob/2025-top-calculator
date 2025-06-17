@@ -20,8 +20,16 @@ const operandContainer = createElement("div", "operand-container");
 const secondNumberContainer = createElement("div", "number-container");
 
 const addButton = createButtons("operation-button", "+");
+const subButton = createButtons("operation-button", "-");
+const multiplyButton = createButtons("operation-button", "*");
+const divideButton = createButtons("operation-button", "/");
 
-operationButtonsContainer.append(addButton);
+operationButtonsContainer.append(
+  addButton,
+  subButton,
+  multiplyButton,
+  divideButton
+);
 
 buttonsContainer.append(numberButtonsContainer, operationButtonsContainer);
 
@@ -42,9 +50,10 @@ const calculator = new Calculator();
 
 calculator.setNumber(5);
 calculator.setNumber(20);
+calculator.setOperation("-");
 
-calculator.sub();
-console.log(calculator.getNumber("result"));
+calculator.getCalculation();
+calculator.getResult();
 
 /**FUNCTIONS */
 function createElement(element, className) {
@@ -55,12 +64,14 @@ function createElement(element, className) {
 
 function Calculator() {
   return {
-    firstNumber: null,
+    firstNumber: 0,
     secondNumber: null,
     result: null,
     currentOperation: null,
+    operand: null,
     add: function () {
       this.result = this.firstNumber + this.secondNumber;
+      console.log();
     },
     sub: function () {
       this.result = this.firstNumber - this.secondNumber;
@@ -90,9 +101,37 @@ function Calculator() {
     setNumber: function (input) {
       if (this.firstNumber) {
         this.secondNumber = input;
+        secondNumberContainer.textContent = input;
         return;
       }
       this.firstNumber = input;
+      firstNumberContainer.textContent = input;
+    },
+    setOperation: function (input) {
+      this.operand = input;
+      operandContainer.textContent = input;
+    },
+    getCalculation: function () {
+      if (this.operand === "+") {
+        this.add();
+        return;
+      }
+      if (this.operand === "-") {
+        this.sub();
+        return;
+      }
+      if (this.operand === "*") {
+        this.multiply();
+        return;
+      }
+      if (this.operand === "/") {
+        this.divide();
+        return;
+      }
+    },
+    getResult: function () {
+      console.log(this.result);
+      return this.result;
     },
   };
 }
