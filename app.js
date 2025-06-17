@@ -137,7 +137,6 @@ function Calculator() {
     getResult: function () {
       this.isSecondNumber = false;
       this.getCalculation();
-      console.log(this.result);
       return this.result;
     },
     getIsSecondNumber: function () {
@@ -161,7 +160,7 @@ function createButtons(className, content, type) {
     );
   }
   if (type === "equal") {
-    button.addEventListener("click", () => calculator.getResult());
+    button.addEventListener("click", handleResult);
   }
   return button;
 }
@@ -172,4 +171,8 @@ function handleClickNumber(e) {
     return;
   }
   firstNumberContainer.textContent = calculator.getNumber("first");
+}
+
+function handleResult() {
+  answerContainer.textContent = calculator.getResult();
 }
