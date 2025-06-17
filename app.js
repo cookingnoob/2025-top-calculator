@@ -20,10 +20,11 @@ const firstNumberContainer = createElement("div", "number-container");
 const operandContainer = createElement("div", "operand-container");
 const secondNumberContainer = createElement("div", "number-container");
 
-const addButton = createButtons("operation-button", "+");
-const subButton = createButtons("operation-button", "-");
-const multiplyButton = createButtons("operation-button", "*");
-const divideButton = createButtons("operation-button", "/");
+const addButton = createButtons("operation-button", "+", "operation");
+const subButton = createButtons("operation-button", "-", "operation");
+const multiplyButton = createButtons("operation-button", "*", "operation");
+const divideButton = createButtons("operation-button", "/", "operation");
+const equalButton = createButtons("operation-button", "=", "equal");
 //numbers array for numbers buttons
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => {
   const button = createButtons("number-button", number);
@@ -35,7 +36,8 @@ operationButtonsContainer.append(
   addButton,
   subButton,
   multiplyButton,
-  divideButton
+  divideButton,
+  equalButton
 );
 
 buttonsContainer.append(numberButtonsContainer, operationButtonsContainer);
@@ -51,6 +53,9 @@ calculatorWrapper.append(screenWrapper, buttonsContainer);
 appWrapper.append(calculatorWrapper);
 
 body.append(appWrapper);
+
+/**FUNCTION CALLINGS */
+const calculator = new Calculator();
 
 /**FUNCTIONS */
 function createElement(element, className) {
@@ -129,24 +134,26 @@ function Calculator() {
       }
     },
     getResult: function () {
+      this.getCalculation();
+      console.log(this.result);
       return this.result;
     },
   };
 }
 
-function createButtons(className, content) {
+function createButtons(className, content, type) {
   const button = createElement("button", className);
   button.textContent = content;
   if (typeof content === "number") {
     button.value = content;
   }
-  if (typeof content !== "number") {
+  if (type === "operation") {
     button.addEventListener("click", (e) =>
       calculator.setOperation(e.target.textContent)
     );
   }
+  if (type === "equal") {
+    button.addEventListener("click", () => calculator.getResult());
+  }
   return button;
 }
-
-/**FUNCTION CALLINGS */
-const calculator = new Calculator();
