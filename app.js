@@ -70,17 +70,16 @@ function Calculator() {
     currentOperation: null,
     operand: null,
     add: function () {
-      this.result = this.firstNumber + this.secondNumber;
-      console.log();
+      return this.firstNumber + this.secondNumber;
     },
     sub: function () {
-      this.result = this.firstNumber - this.secondNumber;
+      return this.firstNumber - this.secondNumber;
     },
     multiply: function () {
-      this.result = this.firstNumber * this.secondNumber;
+      return this.firstNumber * this.secondNumber;
     },
     divide: function () {
-      this.result = this.firstNumber / this.secondNumber;
+      return this.firstNumber / this.secondNumber;
     },
     reset: function () {
       this.firstNumber = null;
@@ -113,19 +112,19 @@ function Calculator() {
     },
     getCalculation: function () {
       if (this.operand === "+") {
-        this.add();
+        this.result = this.add();
         return;
       }
       if (this.operand === "-") {
-        this.sub();
+        this.result = this.sub();
         return;
       }
       if (this.operand === "*") {
-        this.multiply();
+        this.result = this.multiply();
         return;
       }
       if (this.operand === "/") {
-        this.divide();
+        this.result = this.divide();
         return;
       }
     },
