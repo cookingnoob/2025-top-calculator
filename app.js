@@ -19,6 +19,7 @@ const operationContainer = createElement("div", "operations-container");
 const firstNumberContainer = createElement("div", "number-container");
 const operandContainer = createElement("div", "operand-container");
 const secondNumberContainer = createElement("div", "number-container");
+const answerContainer = createElement("div", "answer-container");
 
 const addButton = createButtons("operation-button", "+", "operation");
 const subButton = createButtons("operation-button", "-", "operation");
@@ -46,7 +47,8 @@ screenWrapper.append(
   operationContainer,
   firstNumberContainer,
   operandContainer,
-  secondNumberContainer
+  secondNumberContainer,
+  answerContainer
 );
 
 calculatorWrapper.append(screenWrapper, buttonsContainer);
@@ -115,7 +117,6 @@ function Calculator() {
       operandContainer.textContent = input;
     },
     getCalculation: function () {
-      this.isSecondNumber = false;
       if (this.operand === "+") {
         this.result = this.add();
         return;
@@ -134,8 +135,9 @@ function Calculator() {
       }
     },
     getResult: function () {
+      this.isSecondNumber = false;
       this.getCalculation();
-      console.log(this.result);
+      answerContainer.textContent = this.result;
       return this.result;
     },
   };
