@@ -10,6 +10,8 @@
   background-color: rgb(68, 68, 68);
   padding: 10px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .screen-wrapper {
@@ -17,4 +19,31 @@
   width: 100%;
   height: 200px;
   border-radius: 10px;
+}
+.buttons-container {
+  display: flex;
+  flex: 1;
+}
+.number-buttons-container {
+  display: flex;
+  flex: 2;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 10px;
+  padding: 10px;
+}
+.number-button {
+  background-color: transparent;
+  color: rgba(156, 255, 102, 0.38);
+  border: 1px solid rgba(156, 255, 102, 0.38);
+  border-radius: 10px;
+  flex: 1;
+  flex-basis: 80px;
+  height: 50px;
+  margin-bottom: 30px;
+}
+.operations-buttons-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
