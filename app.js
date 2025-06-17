@@ -26,10 +26,11 @@ const subButton = createButtons("operation-button", "-", "operation");
 const multiplyButton = createButtons("operation-button", "*", "operation");
 const divideButton = createButtons("operation-button", "/", "operation");
 const equalButton = createButtons("operation-button", "=", "equal");
+const clearButton = createButtons("clear-btn", "AC", "clear");
 //numbers array for numbers buttons
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => {
   const button = createButtons("number-button", number);
-  button.addEventListener("click", (e) => calculator.setNumber(e.target.value));
+  button.addEventListener("click", handleClickNumber);
   numberButtonsContainer.append(button);
 });
 
@@ -38,7 +39,8 @@ operationButtonsContainer.append(
   subButton,
   multiplyButton,
   divideButton,
-  equalButton
+  equalButton,
+  clearButton
 );
 
 buttonsContainer.append(numberButtonsContainer, operationButtonsContainer);
@@ -68,23 +70,23 @@ function createElement(element, className) {
 
 function Calculator() {
   return {
-    firstNumber: 0,
-    operand: null,
-    secondNumber: null,
-    result: null,
-    currentOperation: null,
+    firstNumber: "",
+    operand: "",
+    secondNumber: "",
+    result: "",
+    currentOperation: "",
     isSecondNumber: false,
     add: function () {
-      return this.firstNumber + this.secondNumber;
+      return +this.firstNumber + +this.secondNumber;
     },
     sub: function () {
-      return this.firstNumber - this.secondNumber;
+      return +this.firstNumber - +this.secondNumber;
     },
     multiply: function () {
-      return this.firstNumber * this.secondNumber;
+      return +this.firstNumber * +this.secondNumber;
     },
     divide: function () {
-      return this.firstNumber / this.secondNumber;
+      return +this.firstNumber / +this.secondNumber;
     },
     reset: function () {
       this.firstNumber = null;
@@ -104,12 +106,10 @@ function Calculator() {
     },
     setNumber: function (input) {
       if (this.isSecondNumber) {
-        secondNumberContainer.textContent += `${input}`;
-        this.secondNumber = +secondNumberContainer.textContent;
+        this.secondNumber += `${input}`;
         return;
       }
-      firstNumberContainer.textContent += `${input}`;
-      this.firstNumber = +firstNumberContainer.textContent;
+      this.firstNumber += `${input}`;
     },
     setOperation: function (input) {
       this.operand = input;
@@ -137,8 +137,14 @@ function Calculator() {
     getResult: function () {
       this.isSecondNumber = false;
       this.getCalculation();
-      answerContainer.textContent = this.result;
+      console.log(this.result);
       return this.result;
+    },
+    getIsSecondNumber: function () {
+      return this.isSecondNumber;
+    },
+    getOperand: function () {
+      return this.operand;
     },
   };
 }
@@ -158,4 +164,12 @@ function createButtons(className, content, type) {
     button.addEventListener("click", () => calculator.getResult());
   }
   return button;
+}
+function handleClickNumber(e) {
+  calculator.setNumber(e.target.value);
+  if (calculator.getIsSecondNumber()) {
+    secondNumberContainer.textContent = calculator.getNumber("second");
+    return;
+  }
+  firstNumberContainer.textContent = calculator.getNumber("first");
 }
