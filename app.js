@@ -1,6 +1,7 @@
 /**DOM elements */
 const body = document.querySelector("body");
 
+//wrappers and containers for big sections of the app
 const appWrapper = createElement("div", "app-wrapper");
 const calculatorWrapper = createElement("div", "calculator-wrapper");
 const screenWrapper = createElement("section", "screen-wrapper");
@@ -23,6 +24,11 @@ const addButton = createButtons("operation-button", "+");
 const subButton = createButtons("operation-button", "-");
 const multiplyButton = createButtons("operation-button", "*");
 const divideButton = createButtons("operation-button", "/");
+//numbers array for numbers buttons
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => {
+  const button = createButtons("number-button", number);
+  numberButtonsContainer.append(button);
+});
 
 operationButtonsContainer.append(
   addButton,
@@ -129,7 +135,6 @@ function Calculator() {
       }
     },
     getResult: function () {
-      console.log(this.result);
       return this.result;
     },
   };
@@ -139,7 +144,7 @@ function createButtons(className, content) {
   const button = createElement("button", className);
   button.textContent = content;
   if (typeof content === "number") {
-    button.value = calculator;
+    button.value = content;
   }
   return button;
 }
