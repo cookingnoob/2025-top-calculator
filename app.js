@@ -75,6 +75,7 @@ function Calculator() {
     result: "",
     currentOperation: "",
     isSecondNumber: false,
+    error: "",
     add: function () {
       return +this.firstNumber + +this.secondNumber;
     },
@@ -85,6 +86,10 @@ function Calculator() {
       return +this.firstNumber * +this.secondNumber;
     },
     divide: function () {
+      if (+this.secondNumber === 0) {
+        this.error = "ERROR";
+        throw Error("ERROR: CAN'T DIVIDE BY 0");
+      }
       return +this.firstNumber / +this.secondNumber;
     },
     reset: function () {
@@ -113,6 +118,12 @@ function Calculator() {
       this.firstNumber += `${input}`;
     },
     setOperation: function (input) {
+      if (this.result) {
+        this.firstNumber = this.result;
+        this.operand = "";
+        this.secondNumber = "";
+        this.result = "";
+      }
       this.operand = input;
       this.isSecondNumber = true;
     },
@@ -144,6 +155,9 @@ function Calculator() {
     },
     getOperand: function () {
       return this.operand;
+    },
+    getError: function () {
+      return this.error;
     },
   };
 }
