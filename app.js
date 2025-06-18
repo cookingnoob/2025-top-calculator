@@ -45,8 +45,8 @@ operationButtonsContainer.append(
   equalButton,
   clearButton
 );
-previousOperationContainer.textContent = `55 * 2 = 110`;
-mainOperationContainer.textContent = `110`;
+previousOperationContainer.textContent = ``;
+mainOperationContainer.textContent = ``;
 
 buttonsContainer.append(numberButtonsContainer, operationButtonsContainer);
 
@@ -90,7 +90,6 @@ function Calculator() {
     reset: function () {
       this.firstNumber = "";
       this.secondNumber = "";
-      this.currentOperation = "";
       this.operand = "";
       this.result = "";
       this.isSecondNumber = false;
@@ -116,7 +115,6 @@ function Calculator() {
     setOperation: function (input) {
       this.operand = input;
       this.isSecondNumber = true;
-      operandContainer.textContent = input;
     },
     getCalculation: function () {
       if (this.operand === "+") {
@@ -169,17 +167,18 @@ function createButtons(className, content, type) {
   }
   return button;
 }
+
 function handleClickNumber(e) {
   calculator.setNumber(e.target.value);
-  if (calculator.getIsSecondNumber()) {
-    secondNumberContainer.textContent = calculator.getNumber("second");
-    return;
-  }
-  firstNumberContainer.textContent = calculator.getNumber("first");
 }
 
 function handleResult() {
-  answerContainer.textContent = calculator.getResult();
+  previousOperationContainer.textContent = `${calculator.getNumber(
+    "first"
+  )} ${calculator.getOperand()} ${calculator.getNumber(
+    "second"
+  )} = ${calculator.getResult()}`;
+  mainOperationContainer.textContent = calculator.getResult();
 }
 function handlerClear() {
   calculator.reset();
