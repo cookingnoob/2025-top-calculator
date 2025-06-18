@@ -170,6 +170,9 @@ function handleClick(e, action) {
   if (action === "addNumber") {
     calculator.setNumber(e.target.value);
   } else if (action === "operation") {
+    if (!calculator.getNumber("first")) {
+      return;
+    }
     calculator.setOperation(e.target.textContent);
   }
   const first = calculator.getNumber("first")
@@ -193,8 +196,6 @@ function handleResult() {
 
 function handlerClear() {
   calculator.reset();
-  answerContainer.textContent = "";
-  firstNumberContainer.textContent = "";
-  operandContainer.textContent = "";
-  secondNumberContainer.textContent = "";
+  mainOperationContainer.textContent = "";
+  previousOperationContainer.textContent = "";
 }
