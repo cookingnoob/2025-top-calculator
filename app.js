@@ -75,7 +75,7 @@ function Calculator() {
     result: "",
     currentOperation: "",
     isSecondNumber: false,
-    error: "",
+    error: false,
     add: function () {
       return +this.firstNumber + +this.secondNumber;
     },
@@ -86,10 +86,6 @@ function Calculator() {
       return +this.firstNumber * +this.secondNumber;
     },
     divide: function () {
-      if (+this.secondNumber === 0) {
-        this.error = "ERROR";
-        throw Error("ERROR: CAN'T DIVIDE BY 0");
-      }
       return +this.firstNumber / +this.secondNumber;
     },
     reset: function () {
@@ -141,6 +137,13 @@ function Calculator() {
         return;
       }
       if (this.operand === "/") {
+        if (+this.secondNumber === 0) {
+          this.error = true;
+          this.firstNumber = "";
+          this.secondNumber = "";
+          this.operand = "";
+          return;
+        }
         this.result = this.divide().toFixed(2);
         return;
       }
@@ -217,6 +220,11 @@ function handleScreen() {
 
 function handleResult() {
   const result = calculator.getResult();
+  if (calculator.getError()) {
+    previousOperationContainer.textContent = "";
+    mainOperationContainer.textContent = "ERROR";
+    return;
+  }
   previousOperationContainer.textContent = `${calculator.getNumber(
     "first"
   )} ${calculator.getOperand()} ${calculator.getNumber("second")} = ${result}`;
