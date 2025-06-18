@@ -45,12 +45,12 @@ operationButtonsContainer.append(
   equalButton,
   clearButton
 );
-
-mainOperationContainer.textContent = `55 * 2 `;
+previousOperationContainer.textContent = `55 * 2 = 110`;
+mainOperationContainer.textContent = `110`;
 
 buttonsContainer.append(numberButtonsContainer, operationButtonsContainer);
 
-screenWrapper.append(mainOperationContainer, previousOperationContainer);
+screenWrapper.append(previousOperationContainer, mainOperationContainer);
 
 calculatorWrapper.append(screenWrapper, buttonsContainer);
 appWrapper.append(calculatorWrapper);
