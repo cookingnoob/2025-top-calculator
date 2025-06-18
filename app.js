@@ -33,7 +33,7 @@ const clearButton = createButtons("clear-btn", "AC", "clear");
 //numbers array for numbers buttons
 [1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((number) => {
   const button = createButtons("number-button", number);
-  button.addEventListener("click", handleClickNumber);
+  button.addEventListener("click", (e) => handleClick(e, "addNumber"));
   numberButtonsContainer.append(button);
 });
 
@@ -155,7 +155,7 @@ function createButtons(className, content, type) {
     button.value = content;
   }
   if (type === "operation") {
-    button.addEventListener("click", handleOperationClick);
+    button.addEventListener("click", (e) => handleClick(e, "operation"));
   }
   if (type === "equal") {
     button.addEventListener("click", handleResult);
@@ -166,12 +166,20 @@ function createButtons(className, content, type) {
   return button;
 }
 
-function handleClickNumber(e) {
-  calculator.setNumber(e.target.value);
-}
-
-function handleOperationClick(e) {
-  calculator.setOperation(e.target.textContent);
+function handleClick(e, action) {
+  if (action === "addNumber") {
+    calculator.setNumber(e.target.value);
+  } else if (action === "operation") {
+    calculator.setOperation(e.target.textContent);
+  }
+  const first = calculator.getNumber("first")
+    ? calculator.getNumber("first")
+    : "";
+  const operand = calculator.getOperand() ? calculator.getOperand() : "";
+  const second = calculator.getNumber("second")
+    ? calculator.getNumber("second")
+    : "";
+  mainOperationContainer.textContent = `${first} ${operand} ${second}`;
 }
 
 function handleResult() {
