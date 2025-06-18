@@ -187,8 +187,19 @@ function handleClick(e, action) {
     if (!calculator.getNumber("first")) {
       return;
     }
+    if (
+      calculator.getNumber("first") &&
+      calculator.getNumber("second") &&
+      !calculator.getNumber("result")
+    ) {
+      calculator.getResult();
+    }
     calculator.setOperation(e.target.textContent);
   }
+  handleScreen();
+}
+
+function handleScreen() {
   const first = calculator.getNumber("first")
     ? calculator.getNumber("first")
     : "";
@@ -196,16 +207,20 @@ function handleClick(e, action) {
   const second = calculator.getNumber("second")
     ? calculator.getNumber("second")
     : "";
+  if (calculator.getResult) {
+    previousOperationContainer.textContent = "";
+    mainOperationContainer.textContent = `${first} ${operand} ${second}`;
+    return;
+  }
   mainOperationContainer.textContent = `${first} ${operand} ${second}`;
 }
 
 function handleResult() {
+  const result = calculator.getResult();
   previousOperationContainer.textContent = `${calculator.getNumber(
     "first"
-  )} ${calculator.getOperand()} ${calculator.getNumber(
-    "second"
-  )} = ${calculator.getResult()}`;
-  mainOperationContainer.textContent = calculator.getResult();
+  )} ${calculator.getOperand()} ${calculator.getNumber("second")} = ${result}`;
+  mainOperationContainer.textContent = result;
 }
 
 function handlerClear() {
