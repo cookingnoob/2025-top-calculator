@@ -15,11 +15,14 @@ const operationButtonsContainer = createElement(
   "operations-buttons-container"
 );
 
-const operationContainer = createElement("div", "operations-container");
-const firstNumberContainer = createElement("div", "number-container");
-const operandContainer = createElement("div", "operand-container");
-const secondNumberContainer = createElement("div", "number-container");
-const answerContainer = createElement("div", "answer-container");
+const mainOperationContainer = createElement(
+  "div",
+  "main-operations-container"
+);
+const previousOperationContainer = createElement(
+  "div",
+  "previous-operation-container"
+);
 
 const addButton = createButtons("operation-button", "+", "operation");
 const subButton = createButtons("operation-button", "-", "operation");
@@ -43,15 +46,11 @@ operationButtonsContainer.append(
   clearButton
 );
 
+mainOperationContainer.textContent = `55 * 2 `;
+
 buttonsContainer.append(numberButtonsContainer, operationButtonsContainer);
 
-screenWrapper.append(
-  operationContainer,
-  firstNumberContainer,
-  operandContainer,
-  secondNumberContainer,
-  answerContainer
-);
+screenWrapper.append(mainOperationContainer, previousOperationContainer);
 
 calculatorWrapper.append(screenWrapper, buttonsContainer);
 appWrapper.append(calculatorWrapper);
