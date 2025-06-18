@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Digital";
+  src: url("./fonts/digital-7.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
 .app-wrapper {
   display: flex;
   justify-content: center;
@@ -21,6 +27,8 @@
   border-radius: 10px;
 }
 .main-operations-container {
+  font-family: "Digital";
+  font-size: 3rem;
   display: flex;
   justify-content: end;
   padding: 20px;
