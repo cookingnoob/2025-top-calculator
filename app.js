@@ -89,9 +89,12 @@ function Calculator() {
       return +this.firstNumber / +this.secondNumber;
     },
     reset: function () {
-      this.firstNumber = null;
-      this.secondNumber = null;
-      this.currentOperation = null;
+      this.firstNumber = "";
+      this.secondNumber = "";
+      this.currentOperation = "";
+      this.operand = "";
+      this.result = "";
+      this.isSecondNumber = false;
     },
     getNumber: function (numberType) {
       if (numberType === "result") {
@@ -162,6 +165,9 @@ function createButtons(className, content, type) {
   if (type === "equal") {
     button.addEventListener("click", handleResult);
   }
+  if (type === "clear") {
+    button.addEventListener("click", handlerClear);
+  }
   return button;
 }
 function handleClickNumber(e) {
@@ -175,4 +181,11 @@ function handleClickNumber(e) {
 
 function handleResult() {
   answerContainer.textContent = calculator.getResult();
+}
+function handlerClear() {
+  calculator.reset();
+  answerContainer.textContent = "";
+  firstNumberContainer.textContent = "";
+  operandContainer.textContent = "";
+  secondNumberContainer.textContent = "";
 }
