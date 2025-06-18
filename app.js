@@ -129,19 +129,19 @@ function Calculator() {
     },
     getCalculation: function () {
       if (this.operand === "+") {
-        this.result = this.add();
+        this.result = this.add().toFixed(2);
         return;
       }
       if (this.operand === "-") {
-        this.result = this.sub();
+        this.result = this.sub().toFixed(2);
         return;
       }
       if (this.operand === "*") {
-        this.result = this.multiply();
+        this.result = this.multiply().toFixed(2);
         return;
       }
       if (this.operand === "/") {
-        this.result = this.divide();
+        this.result = this.divide().toFixed(2);
         return;
       }
     },
