@@ -155,9 +155,7 @@ function createButtons(className, content, type) {
     button.value = content;
   }
   if (type === "operation") {
-    button.addEventListener("click", (e) =>
-      calculator.setOperation(e.target.textContent)
-    );
+    button.addEventListener("click", handleOperationClick);
   }
   if (type === "equal") {
     button.addEventListener("click", handleResult);
@@ -172,6 +170,10 @@ function handleClickNumber(e) {
   calculator.setNumber(e.target.value);
 }
 
+function handleOperationClick(e) {
+  calculator.setOperation(e.target.textContent);
+}
+
 function handleResult() {
   previousOperationContainer.textContent = `${calculator.getNumber(
     "first"
@@ -180,6 +182,7 @@ function handleResult() {
   )} = ${calculator.getResult()}`;
   mainOperationContainer.textContent = calculator.getResult();
 }
+
 function handlerClear() {
   calculator.reset();
   answerContainer.textContent = "";
